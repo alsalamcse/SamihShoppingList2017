@@ -19,6 +19,9 @@ import android.view.ViewGroup;
 
 import android.widget.TextView;
 
+import com.abbass.samih.samihshoppinglist2017.mainListFragmeets.CurrentFragment;
+import com.abbass.samih.samihshoppinglist2017.mainListFragmeets.HistoryFragment;
+
 public class MainListActivity extends AppCompatActivity {
 
     /**
@@ -30,7 +33,8 @@ public class MainListActivity extends AppCompatActivity {
      * {@link android.support.v4.app.FragmentStatePagerAdapter}.
      */
     private SectionsPagerAdapter mSectionsPagerAdapter;
-
+    private CurrentFragment currentFragment;
+    private HistoryFragment historyFragment;
     /**
      * The {@link ViewPager} that will host the section contents.
      */
@@ -129,6 +133,7 @@ public class MainListActivity extends AppCompatActivity {
      */
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
+
         public SectionsPagerAdapter(FragmentManager fm) {
             super(fm);
         }
@@ -137,22 +142,34 @@ public class MainListActivity extends AppCompatActivity {
         public Fragment getItem(int position) {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
-            return PlaceholderFragment.newInstance(position + 1);
+            if(position==0)
+            {
+                if(currentFragment==null)
+                    currentFragment=new CurrentFragment();
+                return currentFragment;
+            }
+            if(position==1)
+            {
+                if(historyFragment==null)
+                    historyFragment=new HistoryFragment();
+                return historyFragment;
+            }
+            return null;
         }
 
         @Override
         public int getCount() {
-            // Show 3 total pages.
-            return 3;
+            // Show 2 total pages.
+            return 2;
         }
 
         @Override
         public CharSequence getPageTitle(int position) {
             switch (position) {
                 case 0:
-                    return "SECTION 1";
+                    return "Current List";
                 case 1:
-                    return "SECTION 2";
+                    return "History";
                 case 2:
                     return "SECTION 3";
             }
