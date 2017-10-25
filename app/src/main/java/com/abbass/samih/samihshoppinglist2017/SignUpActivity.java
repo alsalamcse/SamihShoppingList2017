@@ -14,7 +14,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class SignUpActivity extends AppCompatActivity {
+public class SignUpActivity extends AppCompatActivity implements View.OnClickListener {
 
     private EditText etEmail,etPassword,etRePassword,etPhone,etName;
     private Button btnSave;
@@ -36,13 +36,7 @@ public class SignUpActivity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         firebaseUser = auth.getCurrentUser();
 
-        btnSave.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v)
-            {
-                dataHandler();
-            }
-        });
+        btnSave.setOnClickListener(this);
 
     }
 
@@ -92,4 +86,11 @@ public class SignUpActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onClick(View view) {
+        if(btnSave==view)
+        {
+            dataHandler();
+        }
+    }
 }

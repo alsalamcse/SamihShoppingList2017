@@ -16,4 +16,6 @@
     <string name="fname">First Name</string>
     <string name="units">Untits: Kg, Gr, num, M...</string>
     <string name="price">Price for one unit</string>
+    <string name="total">Total</string>
+    <string name="count">Count</string>
 </resources>
