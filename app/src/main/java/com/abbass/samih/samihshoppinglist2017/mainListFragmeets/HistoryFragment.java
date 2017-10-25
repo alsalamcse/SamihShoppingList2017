@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 
 import com.abbass.samih.samihshoppinglist2017.R;
 
@@ -14,6 +15,7 @@ import com.abbass.samih.samihshoppinglist2017.R;
  */
 public class HistoryFragment extends Fragment {
 
+    private ListView lstHistory;
 
     public HistoryFragment() {
         // Required empty public constructor
@@ -24,7 +26,9 @@ public class HistoryFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_history, container, false);
+        View view= inflater.inflate(R.layout.fragment_history, container, false);
+        lstHistory= (ListView) view.findViewById(R.id.lstHistory);
+        return  view;
     }
 
 }
