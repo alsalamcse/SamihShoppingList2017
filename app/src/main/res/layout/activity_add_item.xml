@@ -18,20 +18,20 @@
             android:orientation="vertical" >
 
             <EditText
-                android:id="@+id/etAmount"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="@string/amount"
-                android:inputType="numberDecimal" />
-
-            <EditText
                 android:id="@+id/etName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="@string/fname"
                 android:inputType="textPersonName" />
+
+            <EditText
+                android:id="@+id/etAmount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/amount"
+                android:inputType="numberDecimal" />
 
             <EditText
                 android:id="@+id/etUnits"
