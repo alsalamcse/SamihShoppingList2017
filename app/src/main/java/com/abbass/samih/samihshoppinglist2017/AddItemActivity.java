@@ -2,9 +2,12 @@ package com.abbass.samih.samihshoppinglist2017;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+
+import com.google.firebase.database.DatabaseReference;
 
 public class AddItemActivity extends AppCompatActivity
 {
@@ -26,6 +29,13 @@ public class AddItemActivity extends AppCompatActivity
         ibtnImage= (ImageButton) findViewById(R.id.iBtnImage);
         btnSave= (Button) findViewById(R.id.btnSave);
 
+        btnSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dataHandler();
+            }
+        });
+
 
 
     }
@@ -38,6 +48,7 @@ public class AddItemActivity extends AppCompatActivity
         double amount=Double.parseDouble(stAmount);
         double price=Double.parseDouble(stPrice);
 
+        DatabaseReference reference;
 
 
     }
