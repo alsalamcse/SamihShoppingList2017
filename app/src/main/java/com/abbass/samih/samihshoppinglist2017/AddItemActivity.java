@@ -1,13 +1,21 @@
 package com.abbass.samih.samihshoppinglist2017;
 
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
+import com.abbass.samih.samihshoppinglist2017.data.Product;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class AddItemActivity extends AppCompatActivity
 {
@@ -41,15 +49,57 @@ public class AddItemActivity extends AppCompatActivity
     }
     public void dataHandler()
     {
+        //1. get data from the fields
         String stname=etName.getText().toString();
         String stAmount=etAmount.getText().toString();
         String stUntits=etUnits.getText().toString();
         String stPrice=etPrice.getText().toString();
+        //2. todo Validate fields input
+        //isok=true; ....
+
+        //3. data manipulation
         double amount=Double.parseDouble(stAmount);
         double price=Double.parseDouble(stPrice);
 
-        DatabaseReference reference;
+        //4. building data object
+        Product p=new Product();
+        p.setName(stname);
+        p.setAmount(amount);
+        p.setPrice(price);
+        p.setCompleted(false);
 
+
+        //5. to get user email... user info
+        FirebaseAuth auth=FirebaseAuth.getInstance();
+        FirebaseUser user=auth.getCurrentUser();
+        String email=user.getEmail();
+        email=email.replace('.','*');
+
+        //6. building data reference = data path = data address
+        DatabaseReference reference;
+        //todo לקבלת קישור למסד הניתונים שלנו
+        //todo קישור הינו לשורש של המסד הניתונים
+        reference= FirebaseDatabase.getInstance().getReference();
+        //7. saving data on the firebase database
+        reference.child(email).child("mylist").push().setValue(p).
+                //8. add CompleteListener to check if the insertion is done
+        addOnCompleteListener(this, new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if(task.isSuccessful())
+                {
+                    Toast.makeText(AddItemActivity.this, "Add Product Successful", Toast.LENGTH_SHORT).show();
+
+                }
+                else
+                {
+                    Toast.makeText(AddItemActivity.this, "Add Product Failed", Toast.LENGTH_SHORT).show();
+
+                }
+            }
+        });
+        //todo Testing
+        //reference.child("list").setValue(stname);
 
     }
 }
